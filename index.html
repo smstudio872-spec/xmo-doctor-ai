@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus AI Pro - النسخة المتقدمة والشاملة</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Cairo', 'sans-serif'] },
+                    colors: {
+                        deepBg: '#020204',
+                        glassPanel: '#09090e',
+                        borderGlow: '#1e1e2d',
+                        primaryNeon: '#6366f1',
+                    },
+                    keyframes: {
+                        float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-5px)' } }
+                    },
+                    animation: { float: 'float 3s ease-in-out infinite' }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Cairo', sans-serif; background-color: #020204; color: #f4f4f6; overflow: hidden; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #1e1e2d; border-radius: 4px; }
+        
+        .glass-morphism {
+            background: rgba(9, 9, 14, 0.85);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .neon-glow { box-shadow: 0 0 50px -15px rgba(99, 102, 241, 0.15); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    </style>
+</head>
+<body class="h-screen flex selection:bg-indigo-500 selection:text-white relative">
+
+    <!-- خلفية مضيئة متدرجة -->
+    <div class="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[130px] pointer-events-none"></div>
+    <div class="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[130px] pointer-events-none"></div>
+
+    <!-- القائمة الجانبية المتقدمة -->
+    <aside id="sidebar" class="w-80 glass-morphism border-l border-borderGlow flex flex-col justify-between transition-all duration-300 z-30 shadow-2xl">
+        <div class="p-5 flex flex-col h-full">
+            
+            <!-- الهيدر -->
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center shadow-lg shadow-indigo-500/30 animate-float">
+                        <i class="fa-solid fa-atom text-white text-base"></i>
+                    </div>
+                    <div>
+                        <span class="font-bold text-base tracking-wide bg-gradient-to-r from-white to-zinc-400 bg-clip-text text-transparent">Nexus AI</span>
+                        <span class="block text-[10px] text-indigo-400 font-mono tracking-widest">PRO STREAMING V3</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- زر محادثة جديدة -->
+            <button onclick="startNewChat()" class="w-full bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-semibold py-3.5 px-4 rounded-2xl flex items-center justify-center gap-2.5 transition-all shadow-xl shadow-indigo-600/25 group mb-6 border border-indigo-400/20 cursor-pointer">
+                <i class="fa-solid fa-plus text-xs group-hover:rotate-90 transition-transform duration-300"></i>
+                <span class="text-sm">محادثة جديدة</span>
+            </button>
+
+            <!-- السجل الديناميكي -->
+            <div class="flex-1 overflow-y-auto space-y-1.5 pr-1" id="chat-history-list">
+                <div class="text-[10px] font-extrabold text-zinc-500 uppercase tracking-widest px-3 mb-2">سجل المحادثات</div>
+                <a href="#" class="flex items-center gap-3 px-3.5 py-3 rounded-xl text-sm bg-indigo-600/15 text-white border border-indigo-500/30 transition-all group">
+                    <i class="fa-regular fa-message text-indigo-400"></i>
+                    <span class="truncate">استشارة تطوير التطبيق الذكي</span>
+                </a>
+            </div>
+
+            <!-- بروفايل المستخدم والإعدادات -->
+            <div class="border-t border-borderGlow pt-4 mt-4">
+                <div class="flex items-center justify-between p-2.5 rounded-2xl bg-zinc-900/60 border border-zinc-800">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-600 flex items-center justify-center font-bold text-white text-sm shadow-inner">
+                            م
+                        </div>
+                        <div>
+                            <h4 class="text-xs font-bold text-white">المطور الاحترافي</h4>
+                            <span class="text-[10px] text-emerald-400 flex items-center gap-1 font-medium mt-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> متصل بنجاح
+                            </span>
+                        </div>
+                    </div>
+                    <button class="text-zinc-400 hover:text-white p-2 transition-colors">
+                        <i class="fa-solid fa-gear text-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- مساحة الدردشة الرئيسية -->
+    <main class="flex-1 flex flex-col h-full relative">
+        
+        <!-- الهيدر العلوي -->
+        <header class="h-16 border-b border-borderGlow flex items-center justify-between px-6 glass-morphism absolute top-0 left-0 right-0 z-20">
+            <div class="flex items-center gap-4">
+                <button id="toggle-sidebar" class="text-zinc-400 hover:text-white text-base transition-colors p-2.5 rounded-xl hover:bg-zinc-800/60 border border-transparent hover:border-zinc-700">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div class="flex items-center gap-2.5 bg-zinc-900/90 px-3.5 py-1.5 rounded-xl border border-zinc-800">
+                    <span class="w-2 h-2 rounded-full bg-indigo-500 animate-ping"></span>
+                    <span class="text-xs font-semibold text-zinc-200">GPT-4.5 Ultra Streaming Core</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="clearChat()" class="bg-zinc-900 hover:bg-zinc-800 text-zinc-300 text-xs font-semibold px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 border border-zinc-800 shadow-sm">
+                    <i class="fa-solid fa-trash-can text-rose-400"></i> مسح المحادثة
+                </button>
+            </div>
+        </header>
+
+        <!-- صندوق عرض الرسائل -->
+        <div id="chat-container" class="flex-1 overflow-y-auto px-4 md:px-6 pt-24 pb-40 space-y-6 max-w-4xl mx-auto w-full">
+            
+            <!-- رسالة ترحيبية أوليّة -->
+            <div class="flex items-start gap-4 animate-fade-in">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 to-violet-600 flex items-center justify-center shrink-0 shadow-lg shadow-indigo-600/20 border border-indigo-400/30">
+                    <i class="fa-solid fa-robot text-white text-sm"></i>
+                </div>
+                <div class="flex-1 glass-panel border border-borderGlow rounded-2xl p-6 text-zinc-200 leading-relaxed shadow-2xl neon-glow">
+                    <h3 class="font-bold text-white text-lg mb-1.5">مرحباً بك في النظام الذكي المطور 🚀</h3>
+                    <p class="text-zinc-400 text-sm mb-5">أنا جاهز تماماً للرد عليك بكتابة تدريجية حية (Streaming) وتحليل الأكواد باحترافية مطلقة.</p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div onclick="quickSend('اكتب لي كود بايثون لاتصال سريع بالذكاء الاصطناعي')" class="bg-[#12121a]/80 border border-zinc-800 p-3.5 rounded-xl hover:border-indigo-500/50 cursor-pointer transition-all text-xs text-zinc-300 flex items-center gap-3 group">
+                            <i class="fa-solid fa-code text-indigo-400 group-hover:scale-110 transition-transform"></i>
+                            <span>كود بايثون متقدم للاتصال بـ API</span>
+                        </div>
+                        <div onclick="quickSend('كيف أقوم بتحسين أداء واجهة الويب؟')" class="bg-[#12121a]/80 border border-zinc-800 p-3.5 rounded-xl hover:border-indigo-500/50 cursor-pointer transition-all text-xs text-zinc-300 flex items-center gap-3 group">
+                            <i class="fa-solid fa-wand-magic-sparkles text-purple-400 group-hover:scale-110 transition-transform"></i>
+                            <span>كيف أحسن أداء واجهة الويب؟</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- صندوق الإدخال السفلي العائم -->
+        <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#020204] via-[#020204]/90 to-transparent z-20">
+            <div class="max-w-4xl mx-auto w-full">
+                <div class="glass-morphism border border-zinc-700/80 rounded-2xl p-3 focus-within:border-indigo-500 transition-all shadow-2xl">
+                    <textarea id="user-input" rows="1" placeholder="اكتب سؤالك أو اطلب كوداً برمجياً هنا..." class="w-full bg-transparent text-zinc-100 placeholder-zinc-500 focus:outline-none resize-none px-3 py-1.5 text-sm max-h-32"></textarea>
+                    
+                    <div class="flex items-center justify-between pt-2 px-2 border-t border-zinc-800/80 mt-2">
+                        <div class="flex items-center gap-1.5">
+                            <button class="text-zinc-400 hover:text-white p-2.5 rounded-xl hover:bg-zinc-800/60 transition-colors text-sm" title="إرفاق ملف">
+                                <i class="fa-solid fa-paperclip"></i>
+                            </button>
+                            <button class="text-zinc-400 hover:text-white p-2.5 rounded-xl hover:bg-zinc-800/60 transition-colors text-sm" title="تسجيل صوتي">
+                                <i class="fa-solid fa-microphone"></i>
+                            </button>
+                        </div>
+                        <button id="send-btn" onclick="sendMessage()" class="bg-indigo-600 hover:bg-indigo-500 text-white w-10 h-10 rounded-xl flex items-center justify-center transition-all shadow-lg shadow-indigo-600/40 cursor-pointer group">
+                            <i class="fa-solid fa-arrow-up text-sm group-hover:-translate-y-0.5 transition-transform"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <span class="text-[10px] text-zinc-500 tracking-wider">الذكاء الاصطناعي قد يخطئ أحياناً، يرجى التحقق من الأكواد الهامة.</span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- سكريبت البرمجة والتدفق الحقيقي (Streaming Engine) -->
+    <script>
+        const toggleBtn = document.getElementById('toggle-sidebar');
+        const sidebar = document.getElementById('sidebar');
+        
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+            if(sidebar.classList.contains('-translate-x-full')) {
+                sidebar.style.width = '0px';
+                sidebar.style.padding = '0px';
+                sidebar.style.overflow = 'hidden';
+            } else {
+                sidebar.style.width = '20rem';
+                sidebar.style.padding = '';
+                sidebar.style.overflow = '';
+            }
+        });
+
+        const textarea = document.getElementById('user-input');
+        textarea.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+        });
+
+        function quickSend(text) {
+            textarea.value = text;
+            sendMessage();
+        }
+
+        function startNewChat() {
+            document.getElementById('chat-container').innerHTML = `
+                <div class="flex items-start gap-4 animate-fade-in">
+                    <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 to-violet-600 flex items-center justify-center shrink-0 shadow-lg shadow-indigo-600/20 border border-indigo-400/30">
+                        <i class="fa-solid fa-robot text-white text-sm"></i>
+                    </div>
+                    <div class="flex-1 glass-panel border border-borderGlow rounded-2xl p-6 text-zinc-200 leading-relaxed shadow-2xl neon-glow">
+                        <h3 class="font-bold text-white text-lg mb-1.5">محادثة جديدة جاهزة ⚡</h3>
+                        <p class="text-zinc-400 text-sm">كيف يمكنني مساعدتك في مشروعك البرمجي اليوم؟</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function clearChat() {
+            startNewChat();
+        }
+
+        function copyCode(btn) {
+            const pre = btn.parentElement.nextElementSibling;
+            navigator.clipboard.writeText(pre.innerText);
+            btn.innerHTML = '<i class="fa-solid fa-check text-emerald-400"></i> تم النسخ';
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fa-regular fa-copy"></i> نسخ الكود';
+            }, 2000);
+        }
+
+        async function sendMessage() {
+            const text = textarea.value.trim();
+            if(!text) return;
+
+            const chatContainer = document.getElementById('chat-container');
+
+            // عرض رسالة المستخدم
+            const userMsgHTML = `
+                <div class="flex items-start gap-4 flex-row-reverse animate-fade-in">
+                    <div class="w-10 h-10 rounded-2xl bg-zinc-800 flex items-center justify-center shrink-0 font-bold text-white text-sm shadow-md border border-zinc-700">م</div>
+                    <div class="flex-1 bg-indigo-600 text-white rounded-2xl p-4 leading-relaxed max-w-xl shadow-lg shadow-indigo-600/15 text-sm font-medium">${text}</div>
+                </div>
+            `;
+            chatContainer.insertAdjacentHTML('beforeend', userMsgHTML);
+            textarea.value = '';
+            textarea.style.height = 'auto';
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            // محاكاة التفكير ونظام التدفق الحقيقي (Streaming)
+            setTimeout(() => {
+                const aiMsgId = 'ai-resp-' + Date.now();
+                const aiMsgHTML = `
+                    <div class="flex items-start gap-4 animate-fade-in">
+                        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 to-violet-600 flex items-center justify-center shrink-0 shadow-lg shadow-indigo-600/20 border border-indigo-400/30">
+                            <i class="fa-solid fa-robot text-white text-sm"></i>
+                        </div>
+                        <div id="${aiMsgId}" class="flex-1 glass-panel border border-borderGlow rounded-2xl p-6 text-zinc-200 leading-relaxed shadow-2xl space-y-4 text-sm">
+                            <span class="inline-flex items-center gap-2 text-indigo-400"><i class="fa-solid fa-circle-notch fa-spin"></i> جاري توليد الرد تدريجياً...</span>
+                        </div>
+                    </div>
+                `;
+                chatContainer.insertAdjacentHTML('beforeend', aiMsgHTML);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+
+                // الرد الذكي مع محاكاة التدفق (Typewriter Stream)
+                const targetBox = document.getElementById(aiMsgId);
+                
+                let simulatedResponse = `أهلاً بك! لقد استلمت استفسارك حول: "${text}". بناءً على معايير التطوير الحديثة، إليك الكود البرمجي المطلوب مع الشرح الكامل:\n\n` +
+                    `\`\`\`python\n` +
+                    `# مثال حي لربط الواجهة بالذكاء الاصطناعي مع Streaming\n` +
+                    `from openai import OpenAI\n\n` +
+                    `client = OpenAI(api_key="your_api_key")\n` +
+                    `response = client.chat.completions.create(\n` +
+                    `    model="gpt-4o",\n` +
+                    `    messages=[{"role": "user", "content": "${text}"}],\n` +
+                    `    stream=True\n` +
+                    `)\n\n` +
+                    `for chunk in response:\n` +
+                    `    print(chunk.choices[0].delta.content, end="")\n` +
+                    `\`\`\``;
+
+                // تحويل النص تدريجياً حرفاً بحرف
+                targetBox.innerHTML = "";
+                let i = 0;
+                
+                function streamText() {
+                    if (i < simulatedResponse.length) {
+                        // معالجة عرض الأكواد بشكل أنيق إذا وجد
+                        let currentText = simulatedResponse.substring(0, i+1);
+                        
+                        // تن,سق مبسط لعرض الكود إذا انتهى النص أو أثناءه
+                        let formattedHTML = simulatedResponse
+                            .replace(/```python([\s\S]*?)```/g, `
+                                <div class="bg-[#050508] rounded-xl border border-zinc-800 overflow-hidden my-3 shadow-inner">
+                                    <div class="bg-[#12121a] px-4 py-2 border-b border-zinc-800 flex items-center justify-between text-xs text-zinc-400 font-mono">
+                                        <span class="text-indigo-400"><i class="fa-brands fa-python"></i> script.py</span>
+                                        <button onclick="copyCode(this)" class="hover:text-white transition-colors bg-zinc-800 px-2.5 py-1 rounded-md text-[11px] border border-zinc-700 flex items-center gap-1.5 cursor-pointer"><i class="fa-regular fa-copy"></i> نسخ الكود</button>
+                                    </div>
+                                    <pre class="p-4 text-xs font-mono text-indigo-200 overflow-x-auto leading-relaxed"><code>$1</code></pre>
+                                </div>
+                            `)
+                            .replace(/\n/g, '<br>');
+
+                        targetBox.innerHTML = formattedHTML;
+                        chatContainer.scrollTop = chatContainer.scrollHeight;
+                        i += 3; // سرعة التدفق
+                        setTimeout(streamText, 15);
+                    }
+                }
+                streamText();
+
+            }, 500);
+        }
+    </script>
+</body>
+</html>
